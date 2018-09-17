@@ -14,6 +14,7 @@
 		4FFE84A1214EB9B500B721F9 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FFE849F214EB9B500B721F9 /* MainMenu.xib */; };
 		4FFE84AD214EB9B500B721F9 /* MacWolfEdTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFE84AC214EB9B500B721F9 /* MacWolfEdTests.swift */; };
 		4FFE84B8214EB9B500B721F9 /* MacWolfEdUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFE84B7214EB9B500B721F9 /* MacWolfEdUITests.swift */; };
+		4FFE84C62150280900B721F9 /* DocumentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFE84C52150280900B721F9 /* DocumentController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		4FFE84B3214EB9B500B721F9 /* MacWolfEdUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MacWolfEdUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FFE84B7214EB9B500B721F9 /* MacWolfEdUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacWolfEdUITests.swift; sourceTree = "<group>"; };
 		4FFE84B9214EB9B500B721F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4FFE84C52150280900B721F9 /* DocumentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 				4FFE8498214EB9B300B721F9 /* Document.swift */,
 				4FFE849A214EB9B300B721F9 /* Document.xib */,
 				4FFE849D214EB9B500B721F9 /* Assets.xcassets */,
+				4FFE84C52150280900B721F9 /* DocumentController.swift */,
 				4FFE849F214EB9B500B721F9 /* MainMenu.xib */,
 				4FFE84A2214EB9B500B721F9 /* Info.plist */,
 				4FFE84A3214EB9B500B721F9 /* MacWolfEd.entitlements */,
@@ -260,6 +263,7 @@
 			files = (
 				4FFE8499214EB9B300B721F9 /* Document.swift in Sources */,
 				4FFE8497214EB9B300B721F9 /* AppDelegate.swift in Sources */,
+				4FFE84C62150280900B721F9 /* DocumentController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

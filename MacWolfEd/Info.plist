@@ -7,10 +7,10 @@
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
+			<key>LSTypeIsPackage</key>
+			<true/>
 			<key>CFBundleTypeExtensions</key>
-			<array>
-				<string>wad</string>
-			</array>
+			<array/>
 			<key>CFBundleTypeIconFile</key>
 			<string></string>
 			<key>CFBundleTypeName</key>
