@@ -21,16 +21,20 @@ import Foundation
 //
 // Checks that the URL has the following files, in a case insensitive way, and not as folders
 //
-func checkHaveFiles(url: URL, mapping: inout [String: URL?]) throws -> Bool {
+func findSubpaths(url: URL, fileNames: [String]) throws -> [String: URL] {
     let path = url.path
     let files = try FileManager.default.contentsOfDirectory(atPath: path)
-    var solvedSet = Set<String>()
+
+    var result: [String:URL] = [:]
+
     for file in files {
-        let fileLowercase = file.lowercased()
-        if mapping.keys.contains(fileLowercase) {
-            solvedSet.insert(fileLowercase)
-            mapping[fileLowercase] = url.appendingPathComponent(file)
+        let fileLower = file.lowercased()
+        for variant in fileNames {
+            if fileLower.caseInsensitiveCompare(variant) == .orderedSame {
+                result[variant] = url.appendingPathComponent(file)
+                break
+            }
         }
     }
-    return solvedSet.count == mapping.keys.count
+    return result
 }

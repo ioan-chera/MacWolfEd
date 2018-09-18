@@ -34,17 +34,11 @@ class LevelSet {
     // Load levels from folder
     //
     init(folder: URL) throws {
-        var mapping: [String: URL?] = [
-            "gamemaps.wl6": nil,
-            "maphead.wl6": nil
-        ]
+        let files = try findSubpaths(url: folder, fileNames: ["gamemaps.wl6", "maphead.wl6"])
 
-        if try !checkHaveFiles(url: folder, mapping: &mapping) {
+        guard let gamemapsURL = files["gamemaps.wl6"], let mapheadURL = files["maphead.wl6"] else {
             throw LevelSetError.missingFiles
         }
 
-        let gamemapsURL = mapping["gamemaps.wl6"]!
-        let mapheadURL = mapping["maphead.wl6"]!
-        // TODO: load maps from this point
     }
 }
