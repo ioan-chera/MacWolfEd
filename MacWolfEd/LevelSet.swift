@@ -16,32 +16,35 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import Cocoa
+import Foundation
 
 //
-// Subclass of the document controller to be able to open folders
+// Error handling
 //
-class DocumentController : NSDocumentController {
+enum LevelSetError: Error {
+    case missingFiles
+}
+
+//
+// Wolf3D level set
+//
+class LevelSet {
 
     //
-    // Open documents
+    // Load levels from folder
     //
-    override func beginOpenPanel(completionHandler: @escaping ([URL]?) -> Void) {
-        let panel = NSOpenPanel()
-        panel.canChooseFiles = false
-        panel.canChooseDirectories = true
-        panel.begin { (response) in
-            if response == NSApplication.ModalResponse.OK {
-                completionHandler(panel.urls)
-            }
+    init(folder: URL) throws {
+        var mapping: [String: URL?] = [
+            "gamemaps.wl6": nil,
+            "maphead.wl6": nil
+        ]
+
+        if try !checkHaveFiles(url: folder, mapping: &mapping) {
+            throw LevelSetError.missingFiles
         }
-    }
 
-    //
-    // Allow folder
-    //
-    override func typeForContents(of url: URL) throws -> String {
-        let _ = try LevelSet(folder: url)
-        return "DocumentType"
+        let gamemapsURL = mapping["gamemaps.wl6"]!
+        let mapheadURL = mapping["maphead.wl6"]!
+        // TODO: load maps from this point
     }
 }

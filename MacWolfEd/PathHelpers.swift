@@ -16,32 +16,21 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import Cocoa
+import Foundation
 
 //
-// Subclass of the document controller to be able to open folders
+// Checks that the URL has the following files, in a case insensitive way, and not as folders
 //
-class DocumentController : NSDocumentController {
-
-    //
-    // Open documents
-    //
-    override func beginOpenPanel(completionHandler: @escaping ([URL]?) -> Void) {
-        let panel = NSOpenPanel()
-        panel.canChooseFiles = false
-        panel.canChooseDirectories = true
-        panel.begin { (response) in
-            if response == NSApplication.ModalResponse.OK {
-                completionHandler(panel.urls)
-            }
+func checkHaveFiles(url: URL, mapping: inout [String: URL?]) throws -> Bool {
+    let path = url.path
+    let files = try FileManager.default.contentsOfDirectory(atPath: path)
+    var solvedSet = Set<String>()
+    for file in files {
+        let fileLowercase = file.lowercased()
+        if mapping.keys.contains(fileLowercase) {
+            solvedSet.insert(fileLowercase)
+            mapping[fileLowercase] = url.appendingPathComponent(file)
         }
     }
-
-    //
-    // Allow folder
-    //
-    override func typeForContents(of url: URL) throws -> String {
-        let _ = try LevelSet(folder: url)
-        return "DocumentType"
-    }
+    return solvedSet.count == mapping.keys.count
 }

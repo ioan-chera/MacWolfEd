@@ -15,6 +15,8 @@
 		4FFE84AD214EB9B500B721F9 /* MacWolfEdTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFE84AC214EB9B500B721F9 /* MacWolfEdTests.swift */; };
 		4FFE84B8214EB9B500B721F9 /* MacWolfEdUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFE84B7214EB9B500B721F9 /* MacWolfEdUITests.swift */; };
 		4FFE84C62150280900B721F9 /* DocumentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFE84C52150280900B721F9 /* DocumentController.swift */; };
+		4FFE84C82150CBA500B721F9 /* LevelSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFE84C72150CBA500B721F9 /* LevelSet.swift */; };
+		4FFE84CA2150D08300B721F9 /* PathHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFE84C92150D08300B721F9 /* PathHelpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +52,8 @@
 		4FFE84B7214EB9B500B721F9 /* MacWolfEdUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacWolfEdUITests.swift; sourceTree = "<group>"; };
 		4FFE84B9214EB9B500B721F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4FFE84C52150280900B721F9 /* DocumentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentController.swift; sourceTree = "<group>"; };
+		4FFE84C72150CBA500B721F9 /* LevelSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelSet.swift; sourceTree = "<group>"; };
+		4FFE84C92150D08300B721F9 /* PathHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathHelpers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,9 +109,11 @@
 				4FFE849A214EB9B300B721F9 /* Document.xib */,
 				4FFE849D214EB9B500B721F9 /* Assets.xcassets */,
 				4FFE84C52150280900B721F9 /* DocumentController.swift */,
+				4FFE84C72150CBA500B721F9 /* LevelSet.swift */,
 				4FFE849F214EB9B500B721F9 /* MainMenu.xib */,
 				4FFE84A2214EB9B500B721F9 /* Info.plist */,
 				4FFE84A3214EB9B500B721F9 /* MacWolfEd.entitlements */,
+				4FFE84C92150D08300B721F9 /* PathHelpers.swift */,
 			);
 			path = MacWolfEd;
 			sourceTree = "<group>";
@@ -262,8 +268,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				4FFE8499214EB9B300B721F9 /* Document.swift in Sources */,
+				4FFE84C82150CBA500B721F9 /* LevelSet.swift in Sources */,
 				4FFE8497214EB9B300B721F9 /* AppDelegate.swift in Sources */,
 				4FFE84C62150280900B721F9 /* DocumentController.swift in Sources */,
+				4FFE84CA2150D08300B721F9 /* PathHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
