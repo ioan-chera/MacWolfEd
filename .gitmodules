@@ -1,0 +1,3 @@
+[submodule "modules/CommonSwift"]
+	path = modules/CommonSwift
+	url = https://github.com/ioan-chera/CommonSwift.git

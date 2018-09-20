@@ -17,6 +17,9 @@
 		4FFE84C62150280900B721F9 /* DocumentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFE84C52150280900B721F9 /* DocumentController.swift */; };
 		4FFE84C82150CBA500B721F9 /* LevelSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFE84C72150CBA500B721F9 /* LevelSet.swift */; };
 		4FFE84CA2150D08300B721F9 /* PathHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFE84C92150D08300B721F9 /* PathHelpers.swift */; };
+		4FFE84CE2152156A00B721F9 /* Defs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFE84CD2152156A00B721F9 /* Defs.swift */; };
+		4FFE851E21535EBE00B721F9 /* CommonSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FFE851821535C9900B721F9 /* CommonSwift.framework */; };
+		4FFE851F21535EBE00B721F9 /* CommonSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4FFE851821535C9900B721F9 /* CommonSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,7 +37,42 @@
 			remoteGlobalIDString = 4FFE8492214EB9B300B721F9;
 			remoteInfo = MacWolfEd;
 		};
+		4FFE851721535C9900B721F9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4FFE851221535C9900B721F9 /* CommonSwift.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4FFE84F62152FD6500B721F9;
+			remoteInfo = CommonSwift;
+		};
+		4FFE851921535C9900B721F9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4FFE851221535C9900B721F9 /* CommonSwift.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4FFE84FF2152FD6500B721F9;
+			remoteInfo = CommonSwiftTests;
+		};
+		4FFE852021535EBE00B721F9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4FFE851221535C9900B721F9 /* CommonSwift.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 4FFE84F52152FD6500B721F9;
+			remoteInfo = CommonSwift;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		4FFE852221535EBE00B721F9 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				4FFE851F21535EBE00B721F9 /* CommonSwift.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		4FFE8493214EB9B300B721F9 /* MacWolfEd.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacWolfEd.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -54,6 +92,8 @@
 		4FFE84C52150280900B721F9 /* DocumentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentController.swift; sourceTree = "<group>"; };
 		4FFE84C72150CBA500B721F9 /* LevelSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelSet.swift; sourceTree = "<group>"; };
 		4FFE84C92150D08300B721F9 /* PathHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathHelpers.swift; sourceTree = "<group>"; };
+		4FFE84CD2152156A00B721F9 /* Defs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defs.swift; sourceTree = "<group>"; };
+		4FFE851221535C9900B721F9 /* CommonSwift.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CommonSwift.xcodeproj; path = modules/CommonSwift/CommonSwift.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +101,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4FFE851E21535EBE00B721F9 /* CommonSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,10 +125,12 @@
 		4FFE848A214EB9B300B721F9 = {
 			isa = PBXGroup;
 			children = (
+				4FFE851221535C9900B721F9 /* CommonSwift.xcodeproj */,
 				4FFE8495214EB9B300B721F9 /* MacWolfEd */,
 				4FFE84AB214EB9B500B721F9 /* MacWolfEdTests */,
 				4FFE84B6214EB9B500B721F9 /* MacWolfEdUITests */,
 				4FFE8494214EB9B300B721F9 /* Products */,
+				4FFE851B21535CBA00B721F9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -105,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				4FFE8496214EB9B300B721F9 /* AppDelegate.swift */,
+				4FFE84CD2152156A00B721F9 /* Defs.swift */,
 				4FFE8498214EB9B300B721F9 /* Document.swift */,
 				4FFE849A214EB9B300B721F9 /* Document.xib */,
 				4FFE849D214EB9B500B721F9 /* Assets.xcassets */,
@@ -136,6 +180,22 @@
 			path = MacWolfEdUITests;
 			sourceTree = "<group>";
 		};
+		4FFE851321535C9900B721F9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4FFE851821535C9900B721F9 /* CommonSwift.framework */,
+				4FFE851A21535C9900B721F9 /* CommonSwiftTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4FFE851B21535CBA00B721F9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -146,10 +206,12 @@
 				4FFE848F214EB9B300B721F9 /* Sources */,
 				4FFE8490214EB9B300B721F9 /* Frameworks */,
 				4FFE8491214EB9B300B721F9 /* Resources */,
+				4FFE852221535EBE00B721F9 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				4FFE852121535EBE00B721F9 /* PBXTargetDependency */,
 			);
 			name = MacWolfEd;
 			productName = MacWolfEd;
@@ -204,13 +266,16 @@
 				TargetAttributes = {
 					4FFE8492214EB9B300B721F9 = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1000;
 					};
 					4FFE84A7214EB9B500B721F9 = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1000;
 						TestTargetID = 4FFE8492214EB9B300B721F9;
 					};
 					4FFE84B2214EB9B500B721F9 = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1000;
 						TestTargetID = 4FFE8492214EB9B300B721F9;
 					};
 				};
@@ -226,6 +291,12 @@
 			mainGroup = 4FFE848A214EB9B300B721F9;
 			productRefGroup = 4FFE8494214EB9B300B721F9 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 4FFE851321535C9900B721F9 /* Products */;
+					ProjectRef = 4FFE851221535C9900B721F9 /* CommonSwift.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				4FFE8492214EB9B300B721F9 /* MacWolfEd */,
@@ -234,6 +305,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		4FFE851821535C9900B721F9 /* CommonSwift.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = CommonSwift.framework;
+			remoteRef = 4FFE851721535C9900B721F9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4FFE851A21535C9900B721F9 /* CommonSwiftTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = CommonSwiftTests.xctest;
+			remoteRef = 4FFE851921535C9900B721F9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		4FFE8491214EB9B300B721F9 /* Resources */ = {
@@ -268,6 +356,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4FFE8499214EB9B300B721F9 /* Document.swift in Sources */,
+				4FFE84CE2152156A00B721F9 /* Defs.swift in Sources */,
 				4FFE84C82150CBA500B721F9 /* LevelSet.swift in Sources */,
 				4FFE8497214EB9B300B721F9 /* AppDelegate.swift in Sources */,
 				4FFE84C62150280900B721F9 /* DocumentController.swift in Sources */,
@@ -303,6 +392,11 @@
 			isa = PBXTargetDependency;
 			target = 4FFE8492214EB9B300B721F9 /* MacWolfEd */;
 			targetProxy = 4FFE84B4214EB9B500B721F9 /* PBXContainerItemProxy */;
+		};
+		4FFE852121535EBE00B721F9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = CommonSwift;
+			targetProxy = 4FFE852021535EBE00B721F9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -442,6 +536,7 @@
 		4FFE84BD214EB9B500B721F9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MacWolfEd/MacWolfEd.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -454,13 +549,14 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.i-chera.MacWolfEd";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
 		4FFE84BE214EB9B500B721F9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MacWolfEd/MacWolfEd.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -473,7 +569,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.i-chera.MacWolfEd";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -493,7 +589,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.i-chera.MacWolfEdTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MacWolfEd.app/Contents/MacOS/MacWolfEd";
 			};
 			name = Debug;
@@ -514,7 +610,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.i-chera.MacWolfEdTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MacWolfEd.app/Contents/MacOS/MacWolfEd";
 			};
 			name = Release;
@@ -534,7 +630,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.i-chera.MacWolfEdUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_TARGET_NAME = MacWolfEd;
 			};
 			name = Debug;
@@ -554,7 +650,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.i-chera.MacWolfEdUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_TARGET_NAME = MacWolfEd;
 			};
 			name = Release;

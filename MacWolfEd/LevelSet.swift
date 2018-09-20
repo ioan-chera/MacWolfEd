@@ -16,6 +16,7 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import CommonSwift.Swift
 import Foundation
 
 //
@@ -26,9 +27,22 @@ enum LevelSetError: Error {
 }
 
 //
+// Header about level info
+//
+struct LevelHeader {
+    let planeStart: [Int32]     // invariably 3 elements
+    let planeLength: [UInt16]   // same here
+    let width: UInt16
+    let height: UInt16
+    let name: String
+}
+
+//
 // Wolf3D level set
 //
 class LevelSet {
+
+    private let rlewTag: UInt16
 
     //
     // Load levels from folder
@@ -40,5 +54,25 @@ class LevelSet {
             throw LevelSetError.missingFiles
         }
 
+        // TODO: support Spear of Destiny too
+
+        let maphead = try Data(contentsOf: mapheadURL)
+        let gamemaps = try Data(contentsOf: gamemapsURL)
+
+        let headReader = DataReader(data: maphead)
+        rlewTag = try headReader.readUInt16()
+        let headerOffsets = try headReader.readInt32Array(count: numMaps)
+
+        let mapReader = DataReader(data: gamemaps)
+        for offset in headerOffsets {
+            if offset < 0 {
+                continue
+            }
+            try mapReader.seek(position: Int(offset))
+//            let header = LevelHeader(planeStart: mapReader.readInt32Array(count: 3),
+//                                     planeLength: mapReader.readUInt16Array(count: 3),
+//                                     width: mapReader.readUInt16(), height: mapReader.readUInt16(),
+//                                     name: <#T##String#>)
+        }
     }
 }
