@@ -16,7 +16,7 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import CommonSwift.Swift
+import CommonSwift
 import Foundation
 
 //
@@ -48,7 +48,7 @@ class LevelSet {
     // Load levels from folder
     //
     init(folder: URL) throws {
-        let files = try findSubpaths(url: folder, fileNames: ["gamemaps.wl6", "maphead.wl6"])
+        let files = try Path.findSubpaths(url: folder, fileNames: ["gamemaps.wl6", "maphead.wl6"])
 
         guard let gamemapsURL = files["gamemaps.wl6"], let mapheadURL = files["maphead.wl6"] else {
             throw LevelSetError.missingFiles
@@ -64,15 +64,20 @@ class LevelSet {
         let headerOffsets = try headReader.readInt32Array(count: numMaps)
 
         let mapReader = DataReader(data: gamemaps)
+        var headers = [LevelHeader?]()
         for offset in headerOffsets {
             if offset < 0 {
+                headers.append(nil)
                 continue
             }
             try mapReader.seek(position: Int(offset))
-//            let header = LevelHeader(planeStart: mapReader.readInt32Array(count: 3),
-//                                     planeLength: mapReader.readUInt16Array(count: 3),
-//                                     width: mapReader.readUInt16(), height: mapReader.readUInt16(),
-//                                     name: <#T##String#>)
+            headers.append(LevelHeader(planeStart: try mapReader.readInt32Array(count: 3),
+                                       planeLength: try mapReader.readUInt16Array(count: 3),
+                                       width: try mapReader.readUInt16(),
+                                       height: try mapReader.readUInt16(),
+                                       name: try mapReader.readCString(length: 16)))
+
+            // TODO: load each map
         }
     }
 }

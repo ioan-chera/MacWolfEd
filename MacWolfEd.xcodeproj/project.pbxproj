@@ -16,7 +16,6 @@
 		4FFE84B8214EB9B500B721F9 /* MacWolfEdUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFE84B7214EB9B500B721F9 /* MacWolfEdUITests.swift */; };
 		4FFE84C62150280900B721F9 /* DocumentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFE84C52150280900B721F9 /* DocumentController.swift */; };
 		4FFE84C82150CBA500B721F9 /* LevelSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFE84C72150CBA500B721F9 /* LevelSet.swift */; };
-		4FFE84CA2150D08300B721F9 /* PathHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFE84C92150D08300B721F9 /* PathHelpers.swift */; };
 		4FFE84CE2152156A00B721F9 /* Defs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFE84CD2152156A00B721F9 /* Defs.swift */; };
 		4FFE851E21535EBE00B721F9 /* CommonSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FFE851821535C9900B721F9 /* CommonSwift.framework */; };
 		4FFE851F21535EBE00B721F9 /* CommonSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4FFE851821535C9900B721F9 /* CommonSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -91,7 +90,6 @@
 		4FFE84B9214EB9B500B721F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4FFE84C52150280900B721F9 /* DocumentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentController.swift; sourceTree = "<group>"; };
 		4FFE84C72150CBA500B721F9 /* LevelSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelSet.swift; sourceTree = "<group>"; };
-		4FFE84C92150D08300B721F9 /* PathHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathHelpers.swift; sourceTree = "<group>"; };
 		4FFE84CD2152156A00B721F9 /* Defs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defs.swift; sourceTree = "<group>"; };
 		4FFE851221535C9900B721F9 /* CommonSwift.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CommonSwift.xcodeproj; path = modules/CommonSwift/CommonSwift.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -157,7 +155,6 @@
 				4FFE849F214EB9B500B721F9 /* MainMenu.xib */,
 				4FFE84A2214EB9B500B721F9 /* Info.plist */,
 				4FFE84A3214EB9B500B721F9 /* MacWolfEd.entitlements */,
-				4FFE84C92150D08300B721F9 /* PathHelpers.swift */,
 			);
 			path = MacWolfEd;
 			sourceTree = "<group>";
@@ -360,7 +357,6 @@
 				4FFE84C82150CBA500B721F9 /* LevelSet.swift in Sources */,
 				4FFE8497214EB9B300B721F9 /* AppDelegate.swift in Sources */,
 				4FFE84C62150280900B721F9 /* DocumentController.swift in Sources */,
-				4FFE84CA2150D08300B721F9 /* PathHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
