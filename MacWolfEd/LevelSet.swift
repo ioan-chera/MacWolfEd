@@ -38,11 +38,20 @@ struct LevelHeader {
 }
 
 //
+// Map content
+//
+struct LevelMap {
+    var walls: [UInt16]
+    var actors: [UInt16]
+}
+
+//
 // Wolf3D level set
 //
 class LevelSet {
 
     private let rlewTag: UInt16
+    private var levels: [LevelMap?]
 
     //
     // Load levels from folder
@@ -64,20 +73,46 @@ class LevelSet {
         let headerOffsets = try headReader.readInt32Array(count: numMaps)
 
         let mapReader = DataReader(data: gamemaps)
-        var headers = [LevelHeader?]()
+        levels = [LevelMap?]()
         for offset in headerOffsets {
             if offset < 0 {
-                headers.append(nil)
+                levels.append(nil)
                 continue
             }
             try mapReader.seek(position: Int(offset))
-            headers.append(LevelHeader(planeStart: try mapReader.readInt32Array(count: 3),
-                                       planeLength: try mapReader.readUInt16Array(count: 3),
-                                       width: try mapReader.readUInt16(),
-                                       height: try mapReader.readUInt16(),
-                                       name: try mapReader.readCString(length: 16)))
+            let header = LevelHeader(planeStart: try mapReader.readInt32Array(count: 3),
+                                     planeLength: try mapReader.readUInt16Array(count: 3),
+                                     width: try mapReader.readUInt16(),
+                                     height: try mapReader.readUInt16(),
+                                     name: try mapReader.readCString(length: 16))
 
-            // TODO: load each map
+            levels.append(try loadMap(header: header, mapReader: mapReader))
         }
+    }
+
+    //
+    // Loads a map
+    //
+    private func loadMap(header: LevelHeader, mapReader: DataReader) throws -> LevelMap? {
+        var mapSegs = [[UInt16](), [UInt16]()]
+        for plane in stride(from: 0, to: mapPlanes, by: 1) {
+            let pos = header.planeStart[plane]
+            let compressed = header.planeLength[plane]
+            try mapReader.seek(position: Int(pos))
+            let source = try mapReader.readData(length: Int(compressed))
+            let expanded = try DataReader(data: source).readInt32()
+            let buffer2seg = try Compress.carmackExpand(source: source.suffix(from: 4),
+                                                        length: Int(expanded))
+            mapSegs[plane] = Compress.rlewExpand(source: Array(buffer2seg.suffix(from: 1)),
+                                                 length: mapArea * 2, tag: rlewTag)
+            // Check size
+            if mapSegs[plane].count != mapArea {    // sanity check
+                // TODO: report error to user
+                print("Invalid mapseg count of \(header.name) plane \(plane): \(mapSegs[plane].count)")
+                return nil
+            }
+        }
+
+        return LevelMap(walls: mapSegs[0], actors: mapSegs[1])
     }
 }
