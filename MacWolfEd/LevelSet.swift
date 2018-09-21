@@ -80,10 +80,10 @@ class LevelSet {
                 let pos = header.planeStart[plane]
                 let compressed = header.planeLength[plane]
                 try mapReader.seek(position: Int(pos))
-                let source = try mapReader.readData(length: Int(compressed))
-                let expanded = try DataReader(data: source).readInt32()
-                let buffer2seg = try Compress.carmackExpand(source: source.suffix(from: 4),
-                                                            length: Int(expanded))
+                var source = try mapReader.readData(length: Int(compressed))
+                let expanded = try DataReader(data: source).readUInt16()
+                source.removeSubrange(0..<2)
+                let buffer2seg = try Compress.carmackExpand(source: source, length: Int(expanded))
                 mapSegs[plane] = Compress.rlewExpand(source: Array(buffer2seg.suffix(from: 1)),
                                                      length: mapArea * 2, tag: rlewTag)
                 // Check size
