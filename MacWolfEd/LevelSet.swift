@@ -50,7 +50,6 @@ struct LevelMap {
 //
 class LevelSet {
 
-    private let rlewTag: UInt16
     private var levels: [LevelMap?]
 
     //
@@ -69,8 +68,34 @@ class LevelSet {
         let gamemaps = try Data(contentsOf: gamemapsURL)
 
         let headReader = DataReader(data: maphead)
-        rlewTag = try headReader.readUInt16()
+        let rlewTag = try headReader.readUInt16()
         let headerOffsets = try headReader.readInt32Array(count: numMaps)
+
+        //
+        // Loads a map
+        //
+        func loadMap(header: LevelHeader, mapReader: DataReader) throws -> LevelMap? {
+            var mapSegs = [[UInt16](), [UInt16]()]
+            for plane in stride(from: 0, to: mapPlanes, by: 1) {
+                let pos = header.planeStart[plane]
+                let compressed = header.planeLength[plane]
+                try mapReader.seek(position: Int(pos))
+                let source = try mapReader.readData(length: Int(compressed))
+                let expanded = try DataReader(data: source).readInt32()
+                let buffer2seg = try Compress.carmackExpand(source: source.suffix(from: 4),
+                                                            length: Int(expanded))
+                mapSegs[plane] = Compress.rlewExpand(source: Array(buffer2seg.suffix(from: 1)),
+                                                     length: mapArea * 2, tag: rlewTag)
+                // Check size
+                if mapSegs[plane].count != mapArea {    // sanity check
+                    // TODO: report error to user
+                    print("Invalid mapseg count of \(header.name) plane \(plane): \(mapSegs[plane].count)")
+                    return nil
+                }
+            }
+
+            return LevelMap(walls: mapSegs[0], actors: mapSegs[1])
+        }
 
         let mapReader = DataReader(data: gamemaps)
         levels = [LevelMap?]()
@@ -88,31 +113,5 @@ class LevelSet {
 
             levels.append(try loadMap(header: header, mapReader: mapReader))
         }
-    }
-
-    //
-    // Loads a map
-    //
-    private func loadMap(header: LevelHeader, mapReader: DataReader) throws -> LevelMap? {
-        var mapSegs = [[UInt16](), [UInt16]()]
-        for plane in stride(from: 0, to: mapPlanes, by: 1) {
-            let pos = header.planeStart[plane]
-            let compressed = header.planeLength[plane]
-            try mapReader.seek(position: Int(pos))
-            let source = try mapReader.readData(length: Int(compressed))
-            let expanded = try DataReader(data: source).readInt32()
-            let buffer2seg = try Compress.carmackExpand(source: source.suffix(from: 4),
-                                                        length: Int(expanded))
-            mapSegs[plane] = Compress.rlewExpand(source: Array(buffer2seg.suffix(from: 1)),
-                                                 length: mapArea * 2, tag: rlewTag)
-            // Check size
-            if mapSegs[plane].count != mapArea {    // sanity check
-                // TODO: report error to user
-                print("Invalid mapseg count of \(header.name) plane \(plane): \(mapSegs[plane].count)")
-                return nil
-            }
-        }
-
-        return LevelMap(walls: mapSegs[0], actors: mapSegs[1])
     }
 }
