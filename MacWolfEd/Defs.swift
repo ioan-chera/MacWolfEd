@@ -19,6 +19,7 @@
 import AppKit
 import Foundation
 
+let ambushTile = 106
 let areaTile = 107
 let floorColour = NSColor(calibratedRed: 0.4375, green: 0.4375, blue: 0.4375, alpha: 1)
 let mapArea = mapSize * mapSize

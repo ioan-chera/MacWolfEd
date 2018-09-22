@@ -45,7 +45,7 @@ class MapView: NSView {
         }
 
         for i in stride(from: 0, to: mapArea, by: 1) {
-            if level.walls[i] == 0 || level.walls[i] >= areaTile {
+            if level.walls[i] == 0 || level.walls[i] >= ambushTile {
                 floorColour.setFill()
             } else {
                 NSColor.black.setFill()
