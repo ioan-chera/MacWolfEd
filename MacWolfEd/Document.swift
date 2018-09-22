@@ -77,6 +77,9 @@ class Document: NSDocument {
         levelChooserClicked(mapDropDown.selectedItem)
     }
 
+    ///
+    /// When going to next level
+    ///
     @IBAction func goToNextLevel(_ sender: AnyObject?) {
         if mapDropDown.indexOfSelectedItem >= mapDropDown.numberOfItems - 1 {
             NSSound.beep()
