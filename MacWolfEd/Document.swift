@@ -22,6 +22,8 @@ class Document: NSDocument {
 
     @IBOutlet var mapDropDown: NSPopUpButton!
     @IBOutlet var mapView: MapView!
+    @IBOutlet var nextLevelChooser: NSButton!
+    @IBOutlet var previousLevelChooser: NSButton!
 
     //
     // The level set used by this document
@@ -56,11 +58,45 @@ class Document: NSDocument {
         levelChooserClicked(mapDropDown.selectedItem)
     }
 
-    //
-    // When level chooser was clicked
-    //
+    ///
+    /// When level chooser was clicked
+    ///
     @objc func levelChooserClicked(_ sender: AnyObject?) {
         mapView.level = sender?.representedObject as? Level
+    }
+
+    ///
+    /// When going to previous level
+    ///
+    @IBAction func goToPreviousLevel(_ sender: AnyObject?) {
+        if mapDropDown.indexOfSelectedItem == 0 {
+            NSSound.beep()
+            return
+        }
+        mapDropDown.selectItem(at: mapDropDown.indexOfSelectedItem - 1)
+        levelChooserClicked(mapDropDown.selectedItem)
+    }
+
+    @IBAction func goToNextLevel(_ sender: AnyObject?) {
+        if mapDropDown.indexOfSelectedItem >= mapDropDown.numberOfItems - 1 {
+            NSSound.beep()
+            return
+        }
+        mapDropDown.selectItem(at: mapDropDown.indexOfSelectedItem + 1)
+        levelChooserClicked(mapDropDown.selectedItem)
+    }
+
+    //
+    // Enable and disable menu items
+    //
+    override func validateUserInterfaceItem(_ item: NSValidatedUserInterfaceItem) -> Bool {
+        if item.action == #selector(Document.goToPreviousLevel(_:)) {
+            return mapDropDown.indexOfSelectedItem > 0
+        }
+        if item.action == #selector(Document.goToNextLevel(_:)) {
+            return mapDropDown.indexOfSelectedItem < mapDropDown.numberOfItems - 1
+        }
+        return super.validateUserInterfaceItem(item)
     }
 
     override init() {

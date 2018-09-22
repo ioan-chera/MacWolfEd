@@ -10,11 +10,13 @@
             <connections>
                 <outlet property="mapDropDown" destination="hfz-PJ-AjI" id="oUB-9u-mmb"/>
                 <outlet property="mapView" destination="Clx-hZ-Fsj" id="I54-W1-Pl4"/>
+                <outlet property="nextLevelChooser" destination="fRg-fU-5bq" id="IfV-M2-YJE"/>
+                <outlet property="previousLevelChooser" destination="wYe-KH-q39" id="Flm-2c-3e8"/>
                 <outlet property="window" destination="xOd-HO-29H" id="JIz-fz-R2o"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
-        <customObject id="-3" userLabel="Application"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="xOd-HO-29H" userLabel="Window">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
@@ -31,14 +33,14 @@
                     </customView>
                 </subviews>
             </view>
-            <toolbar key="toolbar" implicitIdentifier="FB4381D3-3111-412F-86D0-C122901193E4" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="fY2-Tu-Com">
+            <toolbar key="toolbar" implicitIdentifier="FB4381D3-3111-412F-86D0-C122901193E4" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="fY2-Tu-Com" customClass="CSWholeValidatedToolbar" customModule="CommonSwift">
                 <allowedToolbarItems>
                     <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="oVM-bR-erF"/>
                     <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="afg-xh-XyR"/>
                     <toolbarItem implicitItemIdentifier="42037492-E766-4F2F-8FE0-F95CBE06D8EF" label="Level" paletteLabel="Level" sizingBehavior="auto" id="DZW-V8-PR2">
                         <nil key="toolTip"/>
                         <popUpButton key="view" verticalHuggingPriority="750" id="hfz-PJ-AjI">
-                            <rect key="frame" x="0.0" y="14" width="115" height="28"/>
+                            <rect key="frame" x="0.0" y="14" width="148" height="28"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="zxq-ta-N6s">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -47,9 +49,39 @@
                             </popUpButtonCell>
                         </popUpButton>
                     </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="B9AC18AD-8EA3-4958-BA77-37CAF5C4C947" label="" paletteLabel="Previous" sizingBehavior="auto" id="fF1-Cl-13Z">
+                        <nil key="toolTip"/>
+                        <button key="view" verticalHuggingPriority="750" id="wYe-KH-q39">
+                            <rect key="frame" x="10" y="14" width="33" height="25"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <buttonCell key="cell" type="roundTextured" title="◀" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="qvm-b7-pcd">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                        </button>
+                        <connections>
+                            <action selector="goToPreviousLevel:" target="-2" id="hSF-fA-2xd"/>
+                        </connections>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="835F09CE-F8A1-4521-A8D9-2F8CC10646B6" label="" paletteLabel="Next" sizingBehavior="auto" id="poI-8X-ZLJ">
+                        <nil key="toolTip"/>
+                        <button key="view" verticalHuggingPriority="750" id="fRg-fU-5bq">
+                            <rect key="frame" x="0.0" y="14" width="33" height="25"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <buttonCell key="cell" type="roundTextured" title="▶" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="64G-if-fhp">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                        </button>
+                        <connections>
+                            <action selector="goToNextLevel:" target="-2" id="ZQF-ao-rng"/>
+                        </connections>
+                    </toolbarItem>
                 </allowedToolbarItems>
                 <defaultToolbarItems>
                     <toolbarItem reference="DZW-V8-PR2"/>
+                    <toolbarItem reference="fF1-Cl-13Z"/>
+                    <toolbarItem reference="poI-8X-ZLJ"/>
                     <toolbarItem reference="afg-xh-XyR"/>
                 </defaultToolbarItems>
             </toolbar>
