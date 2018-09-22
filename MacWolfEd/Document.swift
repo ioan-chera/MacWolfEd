@@ -20,8 +20,48 @@ import Cocoa
 
 class Document: NSDocument {
 
+    @IBOutlet var mapDropDown: NSPopUpButton!
     @IBOutlet var mapView: MapView!
-    private var levelSet: LevelSet?
+
+    //
+    // The level set used by this document
+    //
+    private var levelSet: LevelSet? {
+        didSet {
+            updateViews()
+        }
+    }
+
+    //
+    // Updates the display views
+    //
+    func updateViews() {
+        if mapView == nil {
+            return  // quit if nib not loaded yet
+        }
+
+        // Update map drop down
+        mapDropDown.removeAllItems()
+        if let levels = levelSet?.levels {
+            for level in levels {
+                if let level = level {
+                    mapDropDown.addItem(withTitle: level.name)
+                    let item = mapDropDown.item(at: mapDropDown.numberOfItems - 1)
+                    item?.action = #selector(Document.levelChooserClicked(_:))
+                    item?.target = self
+                    item?.representedObject = level
+                }
+            }
+        }
+        levelChooserClicked(mapDropDown.selectedItem)
+    }
+
+    //
+    // When level chooser was clicked
+    //
+    @objc func levelChooserClicked(_ sender: AnyObject?) {
+        mapView.level = sender?.representedObject as? Level
+    }
 
     override init() {
         super.init()
@@ -33,9 +73,7 @@ class Document: NSDocument {
     }
 
     override func windowControllerDidLoadNib(_ windowController: NSWindowController) {
-        if mapView != nil {
-            mapView.level = levelSet?.levels[0]
-        }
+        updateViews()
     }
 
     override var windowNibName: NSNib.Name? {
