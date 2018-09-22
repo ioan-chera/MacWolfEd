@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F359FED215644C900F8C6FF /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F359FEC215644C900F8C6FF /* MapView.swift */; };
+		4F359FEF2156455C00F8C6FF /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F359FEE2156455C00F8C6FF /* Level.swift */; };
 		4FFE8497214EB9B300B721F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFE8496214EB9B300B721F9 /* AppDelegate.swift */; };
 		4FFE8499214EB9B300B721F9 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFE8498214EB9B300B721F9 /* Document.swift */; };
 		4FFE849C214EB9B300B721F9 /* Document.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FFE849A214EB9B300B721F9 /* Document.xib */; };
@@ -74,6 +76,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4F359FEC215644C900F8C6FF /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		4F359FEE2156455C00F8C6FF /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		4FFE8493214EB9B300B721F9 /* MacWolfEd.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacWolfEd.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FFE8496214EB9B300B721F9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4FFE8498214EB9B300B721F9 /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
@@ -151,10 +155,12 @@
 				4FFE849A214EB9B300B721F9 /* Document.xib */,
 				4FFE849D214EB9B500B721F9 /* Assets.xcassets */,
 				4FFE84C52150280900B721F9 /* DocumentController.swift */,
+				4F359FEE2156455C00F8C6FF /* Level.swift */,
 				4FFE84C72150CBA500B721F9 /* LevelSet.swift */,
 				4FFE849F214EB9B500B721F9 /* MainMenu.xib */,
 				4FFE84A2214EB9B500B721F9 /* Info.plist */,
 				4FFE84A3214EB9B500B721F9 /* MacWolfEd.entitlements */,
+				4F359FEC215644C900F8C6FF /* MapView.swift */,
 			);
 			path = MacWolfEd;
 			sourceTree = "<group>";
@@ -353,10 +359,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				4FFE8499214EB9B300B721F9 /* Document.swift in Sources */,
+				4F359FED215644C900F8C6FF /* MapView.swift in Sources */,
 				4FFE84CE2152156A00B721F9 /* Defs.swift in Sources */,
 				4FFE84C82150CBA500B721F9 /* LevelSet.swift in Sources */,
 				4FFE8497214EB9B300B721F9 /* AppDelegate.swift in Sources */,
 				4FFE84C62150280900B721F9 /* DocumentController.swift in Sources */,
+				4F359FEF2156455C00F8C6FF /* Level.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

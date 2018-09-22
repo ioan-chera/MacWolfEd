@@ -16,12 +16,19 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import AppKit
 import Foundation
 
-let areaTile = 107
-let floorColour = NSColor(calibratedRed: 0.4375, green: 0.4375, blue: 0.4375, alpha: 1)
-let mapArea = mapSize * mapSize
-let mapPlanes = 2   // number of planes per map
-let mapSize = 64
-let numMaps = 60    // fixed number of maps
+//
+// Map content
+//
+class Level {
+    var walls: [UInt16]
+    var actors: [UInt16]
+    var name: String
+
+    init(walls: [UInt16], actors: [UInt16], name: String) {
+        self.walls = walls
+        self.actors = actors
+        self.name = name
+    }
+}

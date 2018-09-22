@@ -20,6 +20,9 @@ import Cocoa
 
 class Document: NSDocument {
 
+    @IBOutlet var mapView: MapView!
+    private var levelSet: LevelSet?
+
     override init() {
         super.init()
         // Add your subclass-specific initialization here.
@@ -27,6 +30,12 @@ class Document: NSDocument {
 
     override class var autosavesInPlace: Bool {
         return true
+    }
+
+    override func windowControllerDidLoadNib(_ windowController: NSWindowController) {
+        if mapView != nil {
+            mapView.level = levelSet?.levels[0]
+        }
     }
 
     override var windowNibName: NSNib.Name? {
@@ -45,7 +54,6 @@ class Document: NSDocument {
     // Read from a given URL
     //
     override func read(from url: URL, ofType typeName: String) throws {
-        // TODO: load the Wolfenstein 3D files from here
+        levelSet = try LevelSet(folder: url)
     }
 }
-

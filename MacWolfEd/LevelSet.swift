@@ -38,19 +38,11 @@ struct LevelHeader {
 }
 
 //
-// Map content
-//
-struct LevelMap {
-    var walls: [UInt16]
-    var actors: [UInt16]
-}
-
-//
 // Wolf3D level set
 //
 class LevelSet {
 
-    private var levels: [LevelMap?]
+    private(set) var levels: [Level?]
 
     //
     // Load levels from folder
@@ -74,7 +66,7 @@ class LevelSet {
         //
         // Loads a map
         //
-        func loadMap(header: LevelHeader, mapReader: DataReader) throws -> LevelMap? {
+        func loadMap(header: LevelHeader, mapReader: DataReader) throws -> Level? {
             var mapSegs = [[UInt16](), [UInt16]()]
             for plane in stride(from: 0, to: mapPlanes, by: 1) {
                 let pos = header.planeStart[plane]
@@ -94,11 +86,11 @@ class LevelSet {
                 }
             }
 
-            return LevelMap(walls: mapSegs[0], actors: mapSegs[1])
+            return Level(walls: mapSegs[0], actors: mapSegs[1], name: header.name)
         }
 
         let mapReader = DataReader(data: gamemaps)
-        levels = [LevelMap?]()
+        levels = [Level?]()
         for offset in headerOffsets {
             if offset < 0 {
                 levels.append(nil)
