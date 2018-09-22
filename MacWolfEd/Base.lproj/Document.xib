@@ -30,10 +30,27 @@
                     </customView>
                 </subviews>
             </view>
+            <toolbar key="toolbar" implicitIdentifier="FB4381D3-3111-412F-86D0-C122901193E4" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="fY2-Tu-Com">
+                <allowedToolbarItems>
+                    <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="oVM-bR-erF"/>
+                    <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="afg-xh-XyR"/>
+                    <toolbarItem implicitItemIdentifier="BA91CBAE-A356-4A51-BBE6-24A111BAA945" label="Previous" paletteLabel="Previous Level" tag="-1" image="left" id="ghd-2Q-FSb"/>
+                    <toolbarItem implicitItemIdentifier="7DABB82B-DB8D-4D33-BE0C-138941D5C49B" label="Next" paletteLabel="Next Level" tag="-1" image="right" id="2ga-ac-cug"/>
+                </allowedToolbarItems>
+                <defaultToolbarItems>
+                    <toolbarItem reference="ghd-2Q-FSb"/>
+                    <toolbarItem reference="2ga-ac-cug"/>
+                    <toolbarItem reference="afg-xh-XyR"/>
+                </defaultToolbarItems>
+            </toolbar>
             <connections>
                 <outlet property="delegate" destination="-2" id="0bl-1N-x8E"/>
             </connections>
             <point key="canvasLocation" x="139.5" y="147.5"/>
         </window>
     </objects>
+    <resources>
+        <image name="left" width="144" height="144"/>
+        <image name="right" width="144" height="144"/>
+    </resources>
 </document>
