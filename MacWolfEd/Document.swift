@@ -34,6 +34,15 @@ class Document: NSDocument {
         }
     }
 
+    ///
+    /// The graphics and sounds
+    ///
+    private var vswap: VSwapContainer? {
+        didSet {
+            updateViews()
+        }
+    }
+
     //
     // Updates the display views
     //
@@ -132,5 +141,6 @@ class Document: NSDocument {
     //
     override func read(from url: URL, ofType typeName: String) throws {
         levelSet = try LevelSet(folder: url)
+        vswap = try VSwapContainer(folder: url)
     }
 }
