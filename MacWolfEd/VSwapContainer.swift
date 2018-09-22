@@ -20,10 +20,20 @@ import CommonSwift
 import Foundation
 
 ///
+/// Wall data
+///
+struct WallData {
+    let bright: Data
+    let dark: Data
+}
+
+///
 /// Loads VSWAP files
 ///
 class VSwapContainer {
-    private(set) var pages: [Data]
+    private(set) var walls: [WallData]
+    private(set) var sprites: [Data]
+    private(set) var soundChunks: [Data]
 
     ///
     /// Initializer
@@ -39,9 +49,9 @@ class VSwapContainer {
         let data = try Data(contentsOf: file)
         let reader = DataReader(data: data)
 
-        let numChunks = try reader.readUInt16()
-        let spriteStart = try reader.readUInt16()
-        let soundStart = try reader.readUInt16()
+        let numChunks = Int(try reader.readUInt16())
+        let spriteStart = Int(try reader.readUInt16())
+        let soundStart = Int(try reader.readUInt16())
         var pageOffsets = try reader.readUInt32Array(count: Int(numChunks) + 1)
         let pageLengths = try reader.readUInt16Array(count: Int(numChunks))
 
@@ -59,32 +69,49 @@ class VSwapContainer {
             }
         }
 
-        var alignPadding = 0
-        for u in spriteStart ..< soundStart {
-            let offset = pageOffsets[Int(u)]
-            if offset == 0 {
-                continue
-            }
-            let offs = Int(offset) - Int(dataStart) + alignPadding
-            if offs & 1 == 1 {
-                alignPadding += 1
+        func enumerate(min: Int, max: Int, action: (Data, Int) -> Void) throws {
+            for u in min ..< max {
+                let offset = pageOffsets[u]
+                if offset == 0 {
+                    continue
+                }
+                let size: Int
+                if pageOffsets[Int(u) + 1] == 0 {
+                    size = Int(pageLengths[Int(u)])
+                } else {
+                    size = Int(pageOffsets[Int(u) + 1]) - Int(offset)
+                }
+                try reader.seek(position: Int(offset))
+                action(try reader.readData(length: size), u)
             }
         }
 
-        pages = []
-        for u in 0 ..< numChunks {
-            let offset = pageOffsets[Int(u)]
-            if offset == 0 {
-                continue
-            }
-            let size: Int
-            if pageOffsets[Int(u) + 1] == 0 {
-                size = Int(pageLengths[Int(u)])
+        var horizData = Data()
+        walls = []
+        sprites = []
+        soundChunks = []
+
+        try enumerate(min: 0, max: spriteStart) { (data, index) in
+            if index % 2 == 0 {
+                horizData = data
             } else {
-                size = Int(pageOffsets[Int(u) + 1]) - Int(offset)
+                walls.append(WallData(bright: horizData, dark: data))
             }
-            try reader.seek(position: Int(offset))
-            pages.append(try reader.readData(length: size))
         }
+
+        try enumerate(min: spriteStart, max: soundStart, action: { (data, index) in
+            sprites.append(data)
+        })
+
+        try enumerate(min: soundStart, max: numChunks, action: { (data, index) in
+            soundChunks.append(data)
+        })
+    }
+
+    ///
+    /// Gets all the walls
+    ///
+    private func cacheWalls() {
+
     }
 }

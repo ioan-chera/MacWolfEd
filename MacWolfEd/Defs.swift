@@ -25,4 +25,5 @@ let floorColour = NSColor(calibratedRed: 0.4375, green: 0.4375, blue: 0.4375, al
 let mapArea = mapSize * mapSize
 let mapPlanes = 2   // number of planes per map
 let mapSize = 64
+let maxWallTiles = 64
 let numMaps = 60    // fixed number of maps

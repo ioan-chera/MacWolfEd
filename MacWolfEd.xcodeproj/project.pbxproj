@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4F3248D32156B11300CC8862 /* VSwapContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3248D22156B11300CC8862 /* VSwapContainer.swift */; };
+		4F3248D62156C28B00CC8862 /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3248D52156C28B00CC8862 /* Palette.swift */; };
 		4F359FED215644C900F8C6FF /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F359FEC215644C900F8C6FF /* MapView.swift */; };
 		4F359FEF2156455C00F8C6FF /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F359FEE2156455C00F8C6FF /* Level.swift */; };
 		4F359FF4215652DF00F8C6FF /* left.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F359FF2215652DF00F8C6FF /* left.png */; };
@@ -80,6 +81,7 @@
 
 /* Begin PBXFileReference section */
 		4F3248D22156B11300CC8862 /* VSwapContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSwapContainer.swift; sourceTree = "<group>"; };
+		4F3248D52156C28B00CC8862 /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
 		4F359FEC215644C900F8C6FF /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		4F359FEE2156455C00F8C6FF /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		4F359FF2215652DF00F8C6FF /* left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = left.png; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 				4FFE84A2214EB9B500B721F9 /* Info.plist */,
 				4FFE84A3214EB9B500B721F9 /* MacWolfEd.entitlements */,
 				4F359FEC215644C900F8C6FF /* MapView.swift */,
+				4F3248D52156C28B00CC8862 /* Palette.swift */,
 				4F3248D22156B11300CC8862 /* VSwapContainer.swift */,
 			);
 			path = MacWolfEd;
@@ -380,6 +383,7 @@
 				4FFE8499214EB9B300B721F9 /* Document.swift in Sources */,
 				4F359FED215644C900F8C6FF /* MapView.swift in Sources */,
 				4FFE84CE2152156A00B721F9 /* Defs.swift in Sources */,
+				4F3248D62156C28B00CC8862 /* Palette.swift in Sources */,
 				4F3248D32156B11300CC8862 /* VSwapContainer.swift in Sources */,
 				4FFE84C82150CBA500B721F9 /* LevelSet.swift in Sources */,
 				4FFE8497214EB9B300B721F9 /* AppDelegate.swift in Sources */,
