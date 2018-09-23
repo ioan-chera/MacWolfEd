@@ -32,3 +32,25 @@ class Level {
         self.name = name
     }
 }
+
+///
+/// Convenience stuff
+///
+func all8Neighbours(index: Int, operation: (Int) -> Bool) -> Bool {
+    let x = index % mapSize
+    let y = index / mapSize
+    for dy in -1...1 {
+        for dx in -1...1 {
+            if (0 ..< mapSize).contains(x + dx) && (0 ..< mapSize).contains(y + dy) && dx | dy != 0 {
+                if !operation(index + dx + dy * mapSize) {
+                    return false
+                }
+            }
+        }
+    }
+    return true
+}
+
+func isWall(tile: UInt16) -> Bool {
+    return tile > 0 && tile < ambushTile
+}

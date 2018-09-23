@@ -76,17 +76,25 @@ class MapView: NSView {
         context.setFillColor(backgroundColour.cgColor)
         context.fill(NSRect(origin: origin, size: CGSize(width: maxWidth, height: maxWidth)))
 
+        guard let vswap = vswap else {
+            return
+        }
+
         for i in 0 ..< mapArea {
             let tile = level.walls[i]
             let x = i % mapSize
             let y = i / mapSize
             let rect = CGRect(origin: CGPoint(x: x * tileSize, y: (mapSize - y - 1) * tileSize),
                               size: CGSize(width: tileSize, height: tileSize)) + origin
-            if tile > 0 && tile < ambushTile {
+            if isWall(tile: tile) {
                 let wallIndex = Int(tile) - 1
-                if vswap != nil && wallIndex < vswap!.walls.count {
-                    if let brightPic = vswap!.walls[wallIndex].brightPic {
-                        context.draw(brightPic, in: rect)
+                if wallIndex < vswap.walls.count {
+                    let concealed = all8Neighbours(index: i) { (index) -> Bool in
+                        return isWall(tile: level.walls[index])
+                    }
+                    let wallData = vswap.walls[wallIndex]
+                    if let pic = concealed ? wallData.darkPic : wallData.brightPic {
+                        context.draw(pic, in: rect)
                     }
                     continue
                 }
