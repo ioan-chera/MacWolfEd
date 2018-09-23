@@ -17,13 +17,18 @@
  */
 
 import Cocoa
+import CommonSwift
 
 //
 // Editor view
 //
 class MapView: NSView {
 
+    /// Display tile size
     private let tileSize = 16
+
+    /// Used for centering
+    private var origin = NSPoint()
 
     //
     // The level
@@ -52,12 +57,16 @@ class MapView: NSView {
             return
         }
 
+        let maxWidth = CGFloat(tileSize * mapSize)
+        origin.x = bounds.width > maxWidth ? (bounds.width - maxWidth) / 2 : 0
+        origin.y = bounds.height > maxWidth ? (bounds.height - maxWidth) / 2 : 0
+
         for i in 0 ..< mapArea {
             let tile = level.walls[i]
             let x = i % mapSize
             let y = i / mapSize
             let rect = CGRect(origin: CGPoint(x: x * tileSize, y: (mapSize - y - 1) * tileSize),
-                              size: CGSize(width: tileSize, height: tileSize))
+                              size: CGSize(width: tileSize, height: tileSize)) + origin
             if tile == 0 || tile >= ambushTile {
                 context.setFillColor(floorColour.cgColor)
                 context.fill(rect)
