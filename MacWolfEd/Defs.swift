@@ -40,3 +40,21 @@ let vgaCeilingSpear = [
     0x6f, 0x4f, 0x1d, 0xde, 0xdf, 0x2e, 0x7f, 0x9e, 0xae, 0x7f,
     0x1d, 0xde, 0xdf, 0xde, 0xdf, 0xde, 0xe1, 0xdc, 0x2e, 0x1d, 0xdc
 ]
+
+///
+/// Game mode
+///
+enum GameMode {
+    case wolf3d
+    case spear
+}
+
+struct GameModeInfo {
+    let numLevels: Int
+    let ceilingColours: [Int]
+}
+
+let modeInfo: [GameMode: GameModeInfo] = [
+    .spear: GameModeInfo(numLevels: 21, ceilingColours: vgaCeilingSpear),
+    .wolf3d: GameModeInfo(numLevels: numMaps, ceilingColours: vgaCeilingWolf3D)
+]

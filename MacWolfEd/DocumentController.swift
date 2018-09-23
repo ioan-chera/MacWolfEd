@@ -41,7 +41,6 @@ class DocumentController : NSDocumentController {
     // Allow folder
     //
     override func typeForContents(of url: URL) throws -> String {
-        let _ = try LevelSet(folder: url)
         return "DocumentType"
     }
 }

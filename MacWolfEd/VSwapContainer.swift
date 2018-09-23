@@ -47,15 +47,9 @@ class VSwapContainer {
     ///
     /// Initializer
     ///
-    init(folder: URL) throws {
+    init(url: URL) throws {
 
-        // TODO: support SPEAR and others
-        let paths = try Path.findSubpaths(url: folder, fileNames: ["vswap.wl6"])
-        guard let file = paths["vswap.wl6"] else {
-            throw MyError.missingFiles
-        }
-
-        let data = try Data(contentsOf: file)
+        let data = try Data(contentsOf: url)
         let reader = DataReader(data: data)
 
         let numChunks = Int(try reader.readUInt16())

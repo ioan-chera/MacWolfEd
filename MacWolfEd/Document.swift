@@ -16,6 +16,7 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import CommonSwift
 import Cocoa
 
 class Document: NSDocument {
@@ -25,19 +26,16 @@ class Document: NSDocument {
     @IBOutlet var nextLevelChooser: NSButton!
     @IBOutlet var previousLevelChooser: NSButton!
 
-    //
-    // The level set used by this document
-    //
-    private var levelSet: LevelSet? {
-        didSet {
-            updateViews()
-        }
+    ///
+    /// Document state, whose update influences the view
+    ///
+    private struct State {
+        let levelSet: LevelSet
+        let vswap: VSwapContainer
+        let mode: GameMode
     }
 
-    ///
-    /// The graphics and sounds
-    ///
-    private var vswap: VSwapContainer? {
+    private var state: State? {
         didSet {
             updateViews()
         }
@@ -53,7 +51,7 @@ class Document: NSDocument {
 
         // Update map drop down
         mapDropDown.removeAllItems()
-        if let levels = levelSet?.levels {
+        if let levels = state?.levelSet.levels {
             for level in levels {
                 if let level = level {
                     mapDropDown.addItem(withTitle: level.name)
@@ -64,7 +62,7 @@ class Document: NSDocument {
                 }
             }
         }
-        mapView.vswap = vswap
+        mapView.vswap = state?.vswap
         levelChooserClicked(mapDropDown.selectedItem)
     }
 
@@ -74,8 +72,9 @@ class Document: NSDocument {
     @objc func levelChooserClicked(_ sender: AnyObject?) {
         mapView.level = sender?.representedObject as? Level
         let mapIndex = mapDropDown.indexOfSelectedItem
-        mapView.backgroundColour = (0 ..< vgaCeilingWolf3D.count).contains(mapIndex) ?
-            NSColor(paletteIndex: vgaCeilingWolf3D[mapIndex]) : floorColour
+        let ceilingList = modeInfo[state?.mode ?? .wolf3d]?.ceilingColours ?? []
+        mapView.backgroundColour = (0 ..< ceilingList.count).contains(mapIndex) ?
+            NSColor(paletteIndex: ceilingList[mapIndex]) : floorColour
         previousLevelChooser.isEnabled = mapIndex > 0
         nextLevelChooser.isEnabled = mapIndex < mapDropDown.numberOfItems - 1
     }
@@ -84,10 +83,6 @@ class Document: NSDocument {
     /// When going to previous level
     ///
     @IBAction func goToPreviousLevel(_ sender: AnyObject?) {
-        if mapDropDown.indexOfSelectedItem == 0 {
-            NSSound.beep()
-            return
-        }
         mapDropDown.selectItem(at: mapDropDown.indexOfSelectedItem - 1)
         levelChooserClicked(mapDropDown.selectedItem)
     }
@@ -96,10 +91,6 @@ class Document: NSDocument {
     /// When going to next level
     ///
     @IBAction func goToNextLevel(_ sender: AnyObject?) {
-        if mapDropDown.indexOfSelectedItem >= mapDropDown.numberOfItems - 1 {
-            NSSound.beep()
-            return
-        }
         mapDropDown.selectItem(at: mapDropDown.indexOfSelectedItem + 1)
         levelChooserClicked(mapDropDown.selectedItem)
     }
@@ -146,7 +137,28 @@ class Document: NSDocument {
     // Read from a given URL
     //
     override func read(from url: URL, ofType typeName: String) throws {
-        levelSet = try LevelSet(folder: url)
-        vswap = try VSwapContainer(folder: url)
+        let bases = ["gamemaps", "maphead", "vswap"]
+        let allSOD = bases.map { $0 + ".sod" }
+        let allWL6 = bases.map { $0 + ".wl6" }
+        let allPaths = try Path.findSubpaths(url: url, fileNames: allSOD + allWL6)
+
+        var decidedURLs: [String: URL] = [:]
+
+        let mode: GameMode
+        if allSOD.filter({ allPaths[$0] != nil }) == allSOD {
+            bases.forEach({ decidedURLs[$0] = allPaths[$0 + ".sod"]! })
+            mode = .spear
+        } else if allWL6.filter({ allPaths[$0] != nil }) == allWL6 {
+            bases.forEach({ decidedURLs[$0] = allPaths[$0 + ".wl6"]! })
+            mode = .wolf3d
+        } else {
+            throw MyError.missingFiles
+        }
+
+        state = State(levelSet: try LevelSet(maphead: decidedURLs["maphead"]!,
+                                             gamemaps: decidedURLs["gamemaps"]!,
+                                             maxLevels: modeInfo[mode]!.numLevels),
+                      vswap: try VSwapContainer(url: decidedURLs["vswap"]!),
+                      mode: mode)
     }
 }

@@ -41,15 +41,7 @@ class LevelSet {
     //
     // Load levels from folder
     //
-    init(folder: URL) throws {
-        let files = try Path.findSubpaths(url: folder, fileNames: ["gamemaps.wl6", "maphead.wl6"])
-
-        guard let gamemapsURL = files["gamemaps.wl6"], let mapheadURL = files["maphead.wl6"] else {
-            throw MyError.missingFiles
-        }
-
-        // TODO: support Spear of Destiny too
-
+    init(maphead mapheadURL: URL, gamemaps gamemapsURL: URL, maxLevels: Int = numMaps) throws {
         let maphead = try Data(contentsOf: mapheadURL)
         let gamemaps = try Data(contentsOf: gamemapsURL)
 
@@ -98,6 +90,9 @@ class LevelSet {
                                      name: try mapReader.readCString(length: 16))
 
             levels.append(try loadMap(header: header, mapReader: mapReader))
+            if levels.count == maxLevels {
+                break
+            }
         }
     }
 }
