@@ -64,7 +64,9 @@ class MapView: NSView {
             } else {
                 let wallIndex = Int(tile) - 1
                 if vswap != nil && wallIndex < vswap!.walls.count {
-                    context.draw(vswap!.walls[wallIndex].brightPic, in: rect)
+                    if let brightPic = vswap!.walls[wallIndex].brightPic {
+                        context.draw(brightPic, in: rect)
+                    }
                     continue
                 } else {
                     NSColor.black.setFill()

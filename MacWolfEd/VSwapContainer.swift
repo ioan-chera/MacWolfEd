@@ -22,20 +22,15 @@ import Foundation
 ///
 /// Wall data
 ///
-struct WallData {
+class WallData {
     let bright: Data
     let dark: Data
-    let brightPic: CGImage
-    let darkPic: CGImage
+    private(set) lazy var brightPic = try? makeImageFromRaw(data: bright.transpose(originalWidth: 64), width: 64)
+    private(set) lazy var darkPic = try? makeImageFromRaw(data: dark.transpose(originalWidth: 64), width: 64)
 
     init(bright: Data, dark: Data) throws {
         self.bright = bright
         self.dark = dark
-
-        let brightTransposed = bright.transpose(originalWidth: 64)
-        let darkTransposed = dark.transpose(originalWidth: 64)
-        brightPic = try makeImageFromRaw(data: brightTransposed, width: 64)
-        darkPic = try makeImageFromRaw(data: darkTransposed, width: 64)
     }
 }
 
