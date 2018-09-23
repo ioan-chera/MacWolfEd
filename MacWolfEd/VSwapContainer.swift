@@ -25,8 +25,8 @@ import Foundation
 class WallData {
     let bright: Data
     let dark: Data
-    private(set) lazy var brightPic = try? makeImageFromRaw(data: bright.transpose(originalWidth: 64), width: 64)
-    private(set) lazy var darkPic = try? makeImageFromRaw(data: dark.transpose(originalWidth: 64), width: 64)
+    private(set) lazy var brightPic = try? makeImageFromRaw(data: bright.transposed(originalWidth: 64), width: 64)
+    private(set) lazy var darkPic = try? makeImageFromRaw(data: dark.transposed(originalWidth: 64), width: 64)
 
     init(bright: Data, dark: Data) throws {
         self.bright = bright
