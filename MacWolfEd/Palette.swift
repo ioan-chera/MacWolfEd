@@ -16,6 +16,7 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import AppKit
 import Foundation
 
 ///
@@ -89,3 +90,15 @@ let palette = [
     PAL_RGB(  0, 31, 31),PAL_RGB(  0, 30, 30),PAL_RGB(  0, 29, 29),PAL_RGB(  0, 28, 28),PAL_RGB(  0, 27, 27),
     PAL_RGB( 38,  0, 34)
 ]
+
+///
+/// Extension to allow palette origin
+///
+extension NSColor {
+    convenience init(paletteIndex index: Int) {
+        let raw = palette[index]
+        self.init(calibratedRed: CGFloat(raw.red) / 255,
+                  green: CGFloat(raw.green) / 255,
+                  blue: CGFloat(raw.blue) / 255, alpha: 1)
+    }
+}

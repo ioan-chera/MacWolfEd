@@ -73,8 +73,11 @@ class Document: NSDocument {
     ///
     @objc func levelChooserClicked(_ sender: AnyObject?) {
         mapView.level = sender?.representedObject as? Level
-        previousLevelChooser.isEnabled = mapDropDown.indexOfSelectedItem > 0
-        nextLevelChooser.isEnabled = mapDropDown.indexOfSelectedItem < mapDropDown.numberOfItems - 1
+        let mapIndex = mapDropDown.indexOfSelectedItem
+        mapView.backgroundColour = (0 ..< vgaCeilingWolf3D.count).contains(mapIndex) ?
+            NSColor(paletteIndex: vgaCeilingWolf3D[mapIndex]) : floorColour
+        previousLevelChooser.isEnabled = mapIndex > 0
+        nextLevelChooser.isEnabled = mapIndex < mapDropDown.numberOfItems - 1
     }
 
     ///

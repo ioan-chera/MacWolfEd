@@ -25,7 +25,7 @@ import CommonSwift
 class MapView: NSView {
 
     /// Display tile size
-    private let tileSize = 16
+    private let tileSize = 32
 
     /// Used for centering
     private var origin = NSPoint()
@@ -39,6 +39,18 @@ class MapView: NSView {
         }
     }
 
+    ///
+    /// The default background colour
+    ///
+    var backgroundColour: NSColor = floorColour {
+        didSet {
+            setNeedsDisplay(bounds)
+        }
+    }
+
+    //
+    // The graphics
+    //
     weak var vswap: VSwapContainer? {
         didSet {
             setNeedsDisplay(bounds)
@@ -61,24 +73,22 @@ class MapView: NSView {
         origin.x = bounds.width > maxWidth ? (bounds.width - maxWidth) / 2 : 0
         origin.y = bounds.height > maxWidth ? (bounds.height - maxWidth) / 2 : 0
 
+        context.setFillColor(backgroundColour.cgColor)
+        context.fill(NSRect(origin: origin, size: CGSize(width: maxWidth, height: maxWidth)))
+
         for i in 0 ..< mapArea {
             let tile = level.walls[i]
             let x = i % mapSize
             let y = i / mapSize
             let rect = CGRect(origin: CGPoint(x: x * tileSize, y: (mapSize - y - 1) * tileSize),
                               size: CGSize(width: tileSize, height: tileSize)) + origin
-            if tile == 0 || tile >= ambushTile {
-                context.setFillColor(floorColour.cgColor)
-                context.fill(rect)
-            } else {
+            if tile > 0 && tile < ambushTile {
                 let wallIndex = Int(tile) - 1
                 if vswap != nil && wallIndex < vswap!.walls.count {
                     if let brightPic = vswap!.walls[wallIndex].brightPic {
                         context.draw(brightPic, in: rect)
                     }
                     continue
-                } else {
-                    NSColor.black.setFill()
                 }
             }
         }
