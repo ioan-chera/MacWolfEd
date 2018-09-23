@@ -34,26 +34,42 @@ class MapView: NSView {
         }
     }
 
+    weak var vswap: VSwapContainer? {
+        didSet {
+            setNeedsDisplay(bounds)
+        }
+    }
+
     //
     // Main drawing function
     //
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
-
-        guard let level = level else {
+        guard
+            let context = NSGraphicsContext.current?.cgContext,
+            let level = level else
+        {
             return
         }
 
-        for i in stride(from: 0, to: mapArea, by: 1) {
-            if level.walls[i] == 0 || level.walls[i] >= ambushTile {
-                floorColour.setFill()
-            } else {
-                NSColor.black.setFill()
-            }
+        for i in 0 ..< mapArea {
+            let tile = level.walls[i]
             let x = i % mapSize
             let y = i / mapSize
-            CGRect(origin: CGPoint(x: x * tileSize, y: (mapSize - y - 1) * tileSize),
-                   size: CGSize(width: tileSize, height: tileSize)).fill()
+            let rect = CGRect(origin: CGPoint(x: x * tileSize, y: (mapSize - y - 1) * tileSize),
+                              size: CGSize(width: tileSize, height: tileSize))
+            if tile == 0 || tile >= ambushTile {
+                context.setFillColor(floorColour.cgColor)
+                context.fill(rect)
+            } else {
+                let wallIndex = Int(tile) - 1
+                if vswap != nil && wallIndex < vswap!.walls.count {
+                    context.draw(vswap!.walls[wallIndex].brightPic, in: rect)
+                    continue
+                } else {
+                    NSColor.black.setFill()
+                }
+            }
         }
     }
 }

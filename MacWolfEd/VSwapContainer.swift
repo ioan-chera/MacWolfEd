@@ -25,6 +25,18 @@ import Foundation
 struct WallData {
     let bright: Data
     let dark: Data
+    let brightPic: CGImage
+    let darkPic: CGImage
+
+    init(bright: Data, dark: Data) throws {
+        self.bright = bright
+        self.dark = dark
+
+        let brightTransposed = bright.transpose(originalWidth: 64)
+        let darkTransposed = dark.transpose(originalWidth: 64)
+        brightPic = try makeImageFromRaw(data: brightTransposed, width: 64)
+        darkPic = try makeImageFromRaw(data: darkTransposed, width: 64)
+    }
 }
 
 ///
@@ -43,7 +55,7 @@ class VSwapContainer {
         // TODO: support SPEAR and others
         let paths = try Path.findSubpaths(url: folder, fileNames: ["vswap.wl6"])
         guard let file = paths["vswap.wl6"] else {
-            throw LevelSetError.missingFiles
+            throw MyError.missingFiles
         }
 
         let data = try Data(contentsOf: file)
@@ -65,7 +77,7 @@ class VSwapContainer {
                 continue
             }
             if offset < dataStart || offset >= data.count {
-                throw DataReaderError.readError
+                throw MyError.fileError
             }
         }
 
@@ -91,12 +103,23 @@ class VSwapContainer {
         sprites = []
         soundChunks = []
 
+        var failed = false
         try enumerate(min: 0, max: spriteStart) { (data, index) in
-            if index % 2 == 0 {
-                horizData = data
-            } else {
-                walls.append(WallData(bright: horizData, dark: data))
+            if failed {
+                return
             }
+            do {
+                if index % 2 == 0 {
+                    horizData = data
+                } else {
+                    walls.append(try WallData(bright: horizData, dark: data))
+                }
+            } catch {
+                failed = true
+            }
+        }
+        if failed {
+            throw MyError.fileError
         }
 
         try enumerate(min: spriteStart, max: soundStart, action: { (data, index) in
@@ -106,12 +129,5 @@ class VSwapContainer {
         try enumerate(min: soundStart, max: numChunks, action: { (data, index) in
             soundChunks.append(data)
         })
-    }
-
-    ///
-    /// Gets all the walls
-    ///
-    private func cacheWalls() {
-
     }
 }

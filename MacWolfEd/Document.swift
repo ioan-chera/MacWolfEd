@@ -64,6 +64,7 @@ class Document: NSDocument {
                 }
             }
         }
+        mapView.vswap = vswap
         levelChooserClicked(mapDropDown.selectedItem)
     }
 

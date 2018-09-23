@@ -19,12 +19,6 @@
 import CommonSwift
 import Foundation
 
-//
-// Error handling
-//
-enum LevelSetError: Error {
-    case missingFiles
-}
 
 //
 // Header about level info
@@ -51,7 +45,7 @@ class LevelSet {
         let files = try Path.findSubpaths(url: folder, fileNames: ["gamemaps.wl6", "maphead.wl6"])
 
         guard let gamemapsURL = files["gamemaps.wl6"], let mapheadURL = files["maphead.wl6"] else {
-            throw LevelSetError.missingFiles
+            throw MyError.missingFiles
         }
 
         // TODO: support Spear of Destiny too
