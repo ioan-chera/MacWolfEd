@@ -36,29 +36,35 @@ private func palettedToRGBA(data: Data) -> Data {
 }
 
 ///
-/// Builds an image from raw pixel data
-/// https://stackoverflow.com/a/36175362
+/// CGImage extensions
 ///
-func makeImageFromRaw(data: Data, width: Int) throws -> CGImage {
-    let height = data.count / width
-    let rgba = palettedToRGBA(data: data)
-    let render = CGColorRenderingIntent.defaultIntent
-    let info = CGBitmapInfo.byteOrder32Little
-    guard
-        let provider = CGDataProvider(data: NSData(data: rgba)),
-        let cgimage = CGImage(width: width,
-                              height: height,
-                              bitsPerComponent: 8,
-                              bitsPerPixel: 32,
-                              bytesPerRow: width * 4,
-                              space: CGColorSpace(name: CGColorSpace.sRGB)!,
-                              bitmapInfo: info,
-                              provider: provider,
-                              decode: nil,
-                              shouldInterpolate: true,
-                              intent: render) else
-    {
-        throw MyError.outOfMemory
+extension CGImage {
+
+    ///
+    /// From raw paletted data
+    /// https://stackoverflow.com/a/36175362
+    ///
+    static func fromRawPaletted(data: Data, width: Int) throws -> CGImage {
+        let height = data.count / width
+        let rgba = palettedToRGBA(data: data)
+        let render = CGColorRenderingIntent.defaultIntent
+        let info = CGBitmapInfo.byteOrder32Little
+        guard
+            let provider = CGDataProvider(data: NSData(data: rgba)),
+            let cgimage = CGImage(width: width,
+                                  height: height,
+                                  bitsPerComponent: 8,
+                                  bitsPerPixel: 32,
+                                  bytesPerRow: width * 4,
+                                  space: CGColorSpace(name: CGColorSpace.sRGB)!,
+                                  bitmapInfo: info,
+                                  provider: provider,
+                                  decode: nil,
+                                  shouldInterpolate: true,
+                                  intent: render) else
+        {
+            throw MyError.outOfMemory
+        }
+        return cgimage
     }
-    return cgimage
 }
