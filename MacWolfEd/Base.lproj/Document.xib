@@ -33,12 +33,11 @@
                     </customView>
                 </subviews>
             </view>
-            <toolbar key="toolbar" implicitIdentifier="FB4381D3-3111-412F-86D0-C122901193E4" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="fY2-Tu-Com" customClass="CSWholeValidatedToolbar" customModule="CommonSwift">
+            <toolbar key="toolbar" implicitIdentifier="FB4381D3-3111-412F-86D0-C122901193E4" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="fY2-Tu-Com">
                 <allowedToolbarItems>
                     <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="oVM-bR-erF"/>
                     <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="afg-xh-XyR"/>
-                    <toolbarItem implicitItemIdentifier="42037492-E766-4F2F-8FE0-F95CBE06D8EF" label="Level" paletteLabel="Level" sizingBehavior="auto" id="DZW-V8-PR2">
-                        <nil key="toolTip"/>
+                    <toolbarItem implicitItemIdentifier="42037492-E766-4F2F-8FE0-F95CBE06D8EF" label="Level" paletteLabel="Level" toolTip="Choose Level" sizingBehavior="auto" id="DZW-V8-PR2">
                         <popUpButton key="view" verticalHuggingPriority="750" id="hfz-PJ-AjI">
                             <rect key="frame" x="0.0" y="14" width="148" height="28"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -49,8 +48,7 @@
                             </popUpButtonCell>
                         </popUpButton>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="B9AC18AD-8EA3-4958-BA77-37CAF5C4C947" label="" paletteLabel="Previous" sizingBehavior="auto" id="fF1-Cl-13Z">
-                        <nil key="toolTip"/>
+                    <toolbarItem implicitItemIdentifier="B9AC18AD-8EA3-4958-BA77-37CAF5C4C947" label="" paletteLabel="Previous" toolTip="Go to Previous Level" sizingBehavior="auto" id="fF1-Cl-13Z">
                         <button key="view" verticalHuggingPriority="750" id="wYe-KH-q39">
                             <rect key="frame" x="10" y="14" width="33" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -63,8 +61,7 @@
                             <action selector="goToPreviousLevel:" target="-2" id="hSF-fA-2xd"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="835F09CE-F8A1-4521-A8D9-2F8CC10646B6" label="" paletteLabel="Next" sizingBehavior="auto" id="poI-8X-ZLJ">
-                        <nil key="toolTip"/>
+                    <toolbarItem implicitItemIdentifier="835F09CE-F8A1-4521-A8D9-2F8CC10646B6" label="" paletteLabel="Next" toolTip="Go to Next Level" sizingBehavior="auto" id="poI-8X-ZLJ">
                         <button key="view" verticalHuggingPriority="750" id="fRg-fU-5bq">
                             <rect key="frame" x="0.0" y="14" width="33" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>

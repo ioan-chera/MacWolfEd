@@ -73,6 +73,8 @@ class Document: NSDocument {
     ///
     @objc func levelChooserClicked(_ sender: AnyObject?) {
         mapView.level = sender?.representedObject as? Level
+        previousLevelChooser.isEnabled = mapDropDown.indexOfSelectedItem > 0
+        nextLevelChooser.isEnabled = mapDropDown.indexOfSelectedItem < mapDropDown.numberOfItems - 1
     }
 
     ///
