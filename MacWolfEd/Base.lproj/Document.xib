@@ -8,6 +8,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="Document" customModule="MacWolfEd" customModuleProvider="target">
             <connections>
+                <outlet property="baseView" destination="gIp-Ho-8D9" id="rqT-Ci-mo6"/>
                 <outlet property="mapDropDown" destination="hfz-PJ-AjI" id="oUB-9u-mmb"/>
                 <outlet property="mapView" destination="Clx-hZ-Fsj" id="I54-W1-Pl4"/>
                 <outlet property="nextLevelChooser" destination="fRg-fU-5bq" id="IfV-M2-YJE"/>

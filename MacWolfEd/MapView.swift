@@ -57,6 +57,22 @@ class MapView: NSView {
         }
     }
 
+    ///
+    /// Animates in case of level change
+    ///
+    func animateLevelTransition(levelDifference: Int) {
+        let transition = CATransition()
+        transition.duration = 0.3
+        if levelDifference > 0 {
+            transition.type = .push
+            transition.subtype = .fromRight
+        } else {
+            transition.type = .push
+            transition.subtype = .fromLeft
+        }
+        layer?.add(transition, forKey: "transition")
+    }
+
     //
     // Main drawing function
     //

@@ -25,6 +25,10 @@ class Document: NSDocument {
     @IBOutlet var mapView: MapView!
     @IBOutlet var nextLevelChooser: NSButton!
     @IBOutlet var previousLevelChooser: NSButton!
+    @IBOutlet var baseView: NSView!
+
+    private var previousSelectedLevel = -1   // keep track of previous selected level
+
 
     ///
     /// Document state, whose update influences the view
@@ -77,6 +81,14 @@ class Document: NSDocument {
             NSColor(paletteIndex: ceilingList[mapIndex]) : floorColour
         previousLevelChooser.isEnabled = mapIndex > 0
         nextLevelChooser.isEnabled = mapIndex < mapDropDown.numberOfItems - 1
+
+        // animate view a bit
+        if previousSelectedLevel != -1 && previousSelectedLevel != mapIndex {
+            mapView.animateLevelTransition(levelDifference: mapIndex - previousSelectedLevel)
+        }
+        previousSelectedLevel = mapIndex
+
+        baseView.layer?.backgroundColor = mapView.backgroundColour.blended(withFraction: 0.4, of: NSColor.black)?.cgColor
     }
 
     ///
