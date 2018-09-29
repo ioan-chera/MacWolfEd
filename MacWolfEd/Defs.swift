@@ -22,6 +22,7 @@ import Foundation
 let ambushTile = 106
 let areaTile = 107
 let floorColour = NSColor(calibratedRed: 0.4375, green: 0.4375, blue: 0.4375, alpha: 1)
+let ambushColour = NSColor.magenta
 let mapArea = mapSize * mapSize
 let mapPlanes = 2   // number of planes per map
 let mapSize = 64

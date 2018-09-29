@@ -91,12 +91,20 @@ let palette = [
     PAL_RGB( 38,  0, 34)
 ]
 
+let paletteColours = palette.map { NSColor(rawColour: $0) }
+
 ///
 /// Extension to allow palette origin
 ///
 extension NSColor {
     convenience init(paletteIndex index: Int) {
         let raw = palette[index]
+        self.init(calibratedRed: CGFloat(raw.red) / 255,
+                  green: CGFloat(raw.green) / 255,
+                  blue: CGFloat(raw.blue) / 255, alpha: 1)
+    }
+
+    convenience init(rawColour raw: RawColour) {
         self.init(calibratedRed: CGFloat(raw.red) / 255,
                   green: CGFloat(raw.green) / 255,
                   blue: CGFloat(raw.blue) / 255, alpha: 1)

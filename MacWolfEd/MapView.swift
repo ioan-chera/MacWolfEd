@@ -24,6 +24,8 @@ import CommonSwift
 //
 class MapView: NSView {
 
+    private static let areaColours = paletteColours.map { $0.withAlphaComponent(0.5) }
+
     /// Display tile size
     private let tileSize = 32
 
@@ -85,6 +87,10 @@ class MapView: NSView {
             return
         }
 
+        func areaToIndex(_ tile: UInt16) -> Int {
+            return ((Int(tile) - areaTile) * 3) & 0xff
+        }
+
         let maxWidth = CGFloat(tileSize * mapSize)
         origin.x = bounds.width > maxWidth ? (bounds.width - maxWidth) / 2 : 0
         origin.y = bounds.height > maxWidth ? (bounds.height - maxWidth) / 2 : 0
@@ -114,7 +120,28 @@ class MapView: NSView {
                     }
                     continue
                 }
+                continue
             }
+            if tile == ambushTile {
+                var takenIndex = -1
+                if !all4Neighbours(index: i, operation: { takenIndex = $0; return level.walls[$0] < areaTile }) {
+                    let areaIndex = areaToIndex(level.walls[takenIndex])
+                    context.setFillColor(MapView.areaColours[areaIndex].cgColor)
+                    context.fill(rect)
+                }
+                let insetRect = rect.insetBy(dx: CGFloat(tileSize / 8), dy: CGFloat(tileSize / 8))
+                context.setStrokeColor(ambushColour.cgColor)
+                context.move(to: insetRect.origin)
+                context.addLine(to: insetRect.origin + insetRect.size)
+                context.move(to: insetRect.origin + NSSize(width: insetRect.width, height: 0))
+                context.addLine(to: insetRect.origin + NSSize(width: 0, height: insetRect.height))
+                context.strokePath()
+                continue
+            }
+
+            let areaIndex = areaToIndex(tile)
+            context.setFillColor(MapView.areaColours[areaIndex].cgColor)
+            context.fill(rect)
         }
     }
 }

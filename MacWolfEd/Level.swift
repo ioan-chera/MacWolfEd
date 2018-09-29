@@ -51,6 +51,27 @@ func all8Neighbours(index: Int, operation: (Int) -> Bool) -> Bool {
     return true
 }
 
+///
+/// Visits 4 neighbours, in order of right, up, down, left
+///
+func all4Neighbours(index: Int, operation: (Int) -> Bool) -> Bool {
+    let x = index % mapSize
+    let y = index / mapSize
+    if x < mapSize - 1 && !operation(index + 1) {
+        return false
+    }
+    if y > 0 && !operation(index - mapSize) {
+        return false
+    }
+    if y < mapSize - 1 && !operation(index + mapSize) {
+        return false
+    }
+    if x > 0 && !operation(index - 1) {
+        return false
+    }
+    return true
+}
+
 func isWall(tile: UInt16) -> Bool {
     return tile > 0 && tile < ambushTile
 }
