@@ -290,21 +290,21 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0940;
-				LastUpgradeCheck = 0940;
+				LastUpgradeCheck = 1160;
 				ORGANIZATIONNAME = "Ioan Chera";
 				TargetAttributes = {
 					4FFE8492214EB9B300B721F9 = {
 						CreatedOnToolsVersion = 9.4.1;
-						LastSwiftMigration = 1000;
+						LastSwiftMigration = 1160;
 					};
 					4FFE84A7214EB9B500B721F9 = {
 						CreatedOnToolsVersion = 9.4.1;
-						LastSwiftMigration = 1000;
+						LastSwiftMigration = 1160;
 						TestTargetID = 4FFE8492214EB9B300B721F9;
 					};
 					4FFE84B2214EB9B500B721F9 = {
 						CreatedOnToolsVersion = 9.4.1;
-						LastSwiftMigration = 1000;
+						LastSwiftMigration = 1160;
 						TestTargetID = 4FFE8492214EB9B300B721F9;
 					};
 				};
@@ -575,6 +575,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MacWolfEd/MacWolfEd.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 66L236F264;
@@ -585,7 +586,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.i-chera.MacWolfEd";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -595,6 +596,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MacWolfEd/MacWolfEd.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 66L236F264;
@@ -605,7 +607,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.i-chera.MacWolfEd";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -625,7 +627,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.i-chera.MacWolfEdTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MacWolfEd.app/Contents/MacOS/MacWolfEd";
 			};
 			name = Debug;
@@ -646,7 +648,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.i-chera.MacWolfEdTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MacWolfEd.app/Contents/MacOS/MacWolfEd";
 			};
 			name = Release;
@@ -666,7 +668,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.i-chera.MacWolfEdUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TEST_TARGET_NAME = MacWolfEd;
 			};
 			name = Debug;
@@ -686,7 +688,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.i-chera.MacWolfEdUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TEST_TARGET_NAME = MacWolfEd;
 			};
 			name = Release;
