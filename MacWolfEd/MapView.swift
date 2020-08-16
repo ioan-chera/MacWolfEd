@@ -60,6 +60,13 @@ class MapView: NSView {
     }
 
     ///
+    /// Needed
+    ///
+    override var acceptsFirstResponder: Bool {
+        return true
+    }
+
+    ///
     /// Animates in case of level change
     ///
     func animateLevelTransition(levelDifference: Int) {
